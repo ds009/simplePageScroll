@@ -13,20 +13,24 @@ If you prefer to include yourself dependencies, you may download the version sim
 1. Installation
 2. write your html page as normally, give an ID to the slide wrapper and a class name to all slides in this wrapper.
 3. Add CSS sytles to set sizes of the wrapper and the slides. For whole page slide show, you may set:
-> html, body, #slideWrapper, .slide {
->     width:100%;
->     height: 100%;
-> }
+```
+html, body, #slideWrapper, .slide {
+    width:100%;
+    height: 100%;
+}
+```
 4. At the end of page body, initialize the plugin by:
-> $("#slideWrapper").simplePageScroll({
->     slideTagName: ".slide",             // Default is 'slide'
->     slideContainer: "#slideContainer",  // The wrapper, default value is slideContainer
->     animationTime: 1000,                // Change page animation time
->     quietPeriod: 500,                   // Minimal duration between each slide change event 
->     keyboard: true,                     // Allow keyboard event to control the page scroll
->     pageSelectorID:"slide-btn",         //Only use this when you have a ul of li with buttons as page selectors
->     loop:true                           // Default as false, no more animation after the last page
-> });
+```
+$("#slideWrapper").simplePageScroll({
+    slideTagName: ".slide",             // Default is 'slide'
+    slideContainer: "#slideContainer",  // The wrapper, default value is slideContainer
+    animationTime: 1000,                // Change page animation time
+    quietPeriod: 500,                   // Minimal duration between each slide change event 
+    keyboard: true,                     // Allow keyboard event to control the page scroll
+    pageSelectorID:"slide-btn",         //Only use this when you have a ul of li with buttons as page selectors
+    loop:true                           // Default as false, no more animation after the last page
+});
+```
 
 ## Contributing
 
