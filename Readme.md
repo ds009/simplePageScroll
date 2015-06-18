@@ -51,11 +51,13 @@ An exemple of html page:
         <img src="xxx.svg"></img>
     </div>
 </div>
-<ul id="slide-btn">
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-</ul>
+<div>
+    <ul id="slide-btn">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</div>
 ```
 
 
