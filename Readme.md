@@ -52,11 +52,9 @@ An exemple of html page:
     </div>
 </div>
 <ul id="slide-btn">
-    <li class="cur">1</li>
+    <li>1</li>
     <li>2</li>
     <li>3</li>
-    <li>4</li>
-    <li>5</li>
 </ul>
 ```
 
