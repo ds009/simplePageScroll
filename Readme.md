@@ -6,11 +6,7 @@ I will try to finish it as soon as possible. A demo will be availble soon.
 还有很多功能有待完善，但因为时间问题只能一点点弄了，希望谅解。
 
 ## Installation
-
-You should include in your project [jquery.mousewheel.js](jquery.mousewheel.js) as dependency.
-I added it in simplePageScroll.min.js so you don't need to do it if you use the minified version.
-If you prefer to include yourself dependencies, you may download the version simplePageScroll.js not minified.
-
+Download the script simplePageScroll and include it in your page, then use it following instructions below.
 ## Usage
 1. Installation
 2. write your html page as normally, give an ID to the slide wrapper and a class name to all slides in this wrapper.
@@ -29,7 +25,7 @@ $("#slideWrapper").simplePageScroll({
     animationTime: 1000,                // Change page animation time
     quietPeriod: 500,                   // Minimal duration between each slide change event 
     keyboard: true,                     // Allow keyboard event to control the page scroll
-    pageSelectorID:"slide-btn",         //Only use this when you have a ul of li with buttons as page selectors
+    pageSelectorID:"slide-btn",         // Only use this when you have a ul of li with links(look at the example) as page selectors
     loop:true                           // Default as false, no more animation after the last page
 });
 ```
@@ -52,11 +48,17 @@ An exemple of html page:
     </div>
 </div>
 <div>
-    <ul id="slide-btn">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-    </ul>
+<ul id="slide-btn">
+    <li class="pageSelector">
+        <a href="#" class="active"></a> <!--The plugin will change the active class automaitcally-->
+    </li>
+    <li class="pageSelector">
+        <a href="#"> </a>
+    </li>
+    <li class="pageSelector">
+        <a href="#"> </a>
+    </li>
+</ul>
 </div>
 ```
 
