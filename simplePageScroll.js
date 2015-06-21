@@ -9,7 +9,6 @@
     };
 
     $.fn.simplePageScroll = function(options) {
-        console.log(options);
         if (options.slideTagName && options.slideTagName.charAt(0) !== ".") {
             options.slideTagName = "." + options.slideTagName;
         }
@@ -38,6 +37,7 @@
                 });
             });
         }
+        scroller(); //invoke default page animations
         /*mouse wheel scroll event*/
         slideContainer.one("mouseScroll", mouseMove);
         var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
@@ -121,24 +121,32 @@
         function scroller() {
             //pageSelector.children("li").eq(slideIndex).addClass("cur").siblings().removeClass("cur");
             var targetSlide = $(slides[slideIndex]);
-            if (targetSlide.attr("data-beforeSlideShow")) {
-                var functionName = targetSlide.attr("data-beforeSlideShow"),
+            if (targetSlide.attr("data-beforeshow")) {
+                var functionName = targetSlide.attr("data-beforeshow"),
                     fn = window[functionName];
                 if (typeof fn === 'function') {
                     fn.call(targetSlide);
                 }
             }
             slideContainer.css({
-                "transition": "transform " + settings.animationTime,
-                "transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)"
+                "-webkit-transition": "1s ease-in-out",
+                "-moz-transition": "1s ease-in-out",
+                "-o-transition": "1s ease-in-out",
+                "-ms-transition": "1s ease-in-out",
+                "transition": "1s ease-in-out",
+                "transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-webkit-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-ms-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-o-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-moz-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)"
             });
             if (hasPageSelector) {
                 $(settings.pageSelectorID + " li:nth-child(" + (slideIndex + 1) + ") a").addClass('active');
                 $(settings.pageSelectorID + " li:nth-child(" + (slideIndex + 1) + ")").siblings().children("a").removeClass('active');
             }
             // invoke animation in the target function
-            if (targetSlide.attr("data-afterSlideShow")) {
-                var functionName = targetSlide.attr("data-afterSlideShow"),
+            if (targetSlide.attr("data-aftershow")) {
+                var functionName = targetSlide.attr("data-aftershow"),
                     fn = window[functionName];
                 if (typeof fn === 'function') {
                     fn.call(targetSlide);
