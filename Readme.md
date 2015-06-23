@@ -26,7 +26,8 @@ $("#slideWrapper").simplePageScroll({
     quietPeriod: 500,                   // Minimal duration between each slide change event 
     keyboard: true,                     // Allow keyboard event to control the page scroll
     pageSelectorID:"slide-btn",         // Only use this when you have a ul of li with links(look at the example) as page selectors
-    loop:true                           // Default as false, no more animation after the last page
+    loop:true,                          // Default as false, no more animation after the last page
+    doBeforeEach:"resetSomething"       //doBeforeEach and doAfterEach execute before/after each slide show
 });
 ```
 5. You can specify functions to each slide so that it can be executed before and after showing by adding `data-beforeSlideShow="functionName"` or `data-afterSlideShow="functionName"` to the slide definition.
