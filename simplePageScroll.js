@@ -12,7 +12,7 @@
         if (options.slideTagName && options.slideTagName.charAt(0) !== ".") {
             options.slideTagName = "." + options.slideTagName;
         }
-        if (options.slideContainer && options.slideContainer.charAt(0) !== ".") {
+        if (options.slideContainer && options.slideContainer.charAt(0) !== "#") {
             options.slideContainer = "#" + options.slideContainer;
         }
         var settings = $.extend({}, defaults, options),
@@ -104,12 +104,12 @@
         if (isTouchDevice()) {
             var index = 0;
             var startY;
-
-            document.addEventListener('touchstart', touchstart, false);
-            document.addEventListener('touchmove', function(e) {
+            containerElement = document.getElementById(settings.slideContainer.slice(1))
+            containerElement.addEventListener('touchstart', touchstart, false);
+            containerElement.addEventListener('touchmove', function(e) {
                 e.preventDefault();
             }, false);
-            document.addEventListener('touchend', touchend, false);
+            containerElement.addEventListener('touchend', touchend, false);
 
             function touchstart(event) {
                 var touches = event.changedTouches;
