@@ -38,6 +38,7 @@
             });
         }
         scroller(); //invoke default page animations
+
         /*mouse wheel scroll event*/
         slideContainer.one("mouseScroll", mouseMove);
         var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
@@ -93,6 +94,52 @@
             }
         }
 
+        /* touch screen swipe*/
+
+        function isTouchDevice() {
+            return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+        };
+
+
+        if (isTouchDevice()) {
+            var index = 0;
+            var startY;
+
+            document.addEventListener('touchstart', touchstart, false);
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, false);
+            document.addEventListener('touchend', touchend, false);
+
+            function touchstart(event) {
+                var touches = event.changedTouches;
+                startY = touches[0].pageY;
+                startTime = new Date().getTime();
+                event.preventDefault();
+            };
+
+            function touchend(event) {
+                var touches = event.changedTouches;
+                var deltaY = startY - touches[0].pageY;
+                if (deltaY >= 0) {
+                    slideContainer.trigger("swipeUp");
+                }
+                if (deltaY < 0) {
+                    slideContainer.trigger("swipeDown");
+                }
+                event.preventDefault();
+            };
+            slideContainer.bind("swipeUp", goscroll);
+            slideContainer.bind("swipeDown", goscroll);
+
+            function goscroll(event) {
+                if (event.type === "swipeUp") {
+                    changePage(true);
+                } else {
+                    changePage(false);
+                }
+            };
+        }
 
         function changePage(pageUp) {
             if (pageUp) {
@@ -121,6 +168,13 @@
         function scroller() {
             //pageSelector.children("li").eq(slideIndex).addClass("cur").siblings().removeClass("cur");
             var targetSlide = $(slides[slideIndex]);
+            if (settings.doBeforeEach) {
+                var functionName = settings.doBeforeEach,
+                    fn = window[functionName];
+                if (typeof fn === 'function') {
+                    fn.call(targetSlide);
+                }
+            }
             if (targetSlide.attr("data-beforeshow")) {
                 var functionName = targetSlide.attr("data-beforeshow"),
                     fn = window[functionName];
@@ -147,6 +201,13 @@
             // invoke animation in the target function
             if (targetSlide.attr("data-aftershow")) {
                 var functionName = targetSlide.attr("data-aftershow"),
+                    fn = window[functionName];
+                if (typeof fn === 'function') {
+                    fn.call(targetSlide);
+                }
+            }
+            if (settings.doAfterEach) {
+                var functionName = settings.doAfterEach,
                     fn = window[functionName];
                 if (typeof fn === 'function') {
                     fn.call(targetSlide);
