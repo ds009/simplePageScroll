@@ -28,8 +28,7 @@
             var hasPageSelector = true,
                 pageSelectors = $(settings.pageSelectorID + " li")
             if (pageSelectors.length !== (maxSlide + 1)) {
-                cons
-ole.log("page selector size different with slide numbers")
+                console.log("page selector size different with slide numbers")
             }
             pageSelectors.each(function(index) {
                 $(this).click(function() {
