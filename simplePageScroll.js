@@ -52,8 +52,11 @@
         function handleScroll(event) {
             var e = event || window.event;
 
-            if ((e.wheelDelta && Math.abs(e.wheelDelta) >= 40) || (e.wheelDeltaY && Math.abs(e.wheelDeltaY) >= 40)) {
+            if (e.wheelDelta && Math.abs(e.wheelDelta) >= 40) {
                 slideContainer.trigger("mouseScroll", [(e.wheelDelta < 0)]);
+            } else if (e.wheelDeltaY && Math.abs(e.wheelDeltaY) >= 10) {
+                console.log(e.wheelDeltaY);
+                slideContainer.trigger("mouseScroll", [(e.wheelDeltaY < 0)]);
             } else {
                 slideContainer.trigger("mouseScroll", [(e.detail > 0)]);
             }
